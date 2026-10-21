@@ -1,0 +1,46 @@
+# Local IDE files
+.vs/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Environment and credentials
+.env
+.env.*
+!.env.example
+wp-config.php
+**/wp-config.php
+*.pem
+*.key
+id_rsa
+id_ed25519
+
+# Backups and database exports (never publish)
+*.sql
+*.sql.gz
+*.sqlite
+*.sqlite3
+*.bak
+*.backup
+*.dump
+*.tar
+*.tar.gz
+*.zip
+backup/
+backups/
+**/backup/
+**/backups/
+
+# WordPress user uploads and volatile data
+wp-content/uploads/
+**/wp-content/uploads/
+wp-content/cache/
+**/wp-content/cache/
+error_log
+*.log
+
+# Local OS files
+.DS_Store
+Thumbs.db
