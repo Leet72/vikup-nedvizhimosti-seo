@@ -45,21 +45,24 @@ $mvk_reviews = carbon_get_theme_option('nk_feedback_bar');
         </div>
       </div>
     <?php endif; ?>
-    <div class="mvk-reviews__footer">
-      <div class="mvk-reviews__yandex">
-        <div class="mvk-reviews__yandex-copy">
-          <strong class="mvk-reviews__yandex-name">Оценка на Яндекс Картах</strong>
-          <span class="mvk-reviews__yandex-caption">Реальные оценки и отзывы об организации</span>
-        </div>
-        <div class="mvk-reviews__yandex-slot" id="mvk-yandex-rating-slot">
-          <?php /* Replace this placeholder with the exact official Yandex Business code. */ ?>
-          Место для официального бейджа
+    <div class="mvk-reviews__yandex-section" id="mvk-yandex-reviews">
+      <div class="mvk-reviews__yandex-intro">
+        <span class="mvk-reviews__eyebrow">Яндекс Карты</span>
+        <h3 class="mvk-reviews__yandex-heading">Отзывы о компании на Яндекс Картах</h3>
+        <p class="mvk-reviews__yandex-description">Читайте отзывы клиентов непосредственно из карточки «Московский выкуп квартир» на Яндекс Картах.</p>
+        <a class="mvk-reviews__all" href="https://yandex.ru/maps/org/moskovskiy_vykup_kvartir/161893440217/" target="_blank" rel="noopener noreferrer">
+          Открыть отзывы на Яндексе
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+        </a>
+        <p class="mvk-reviews__yandex-note">Рейтинг и отзывы формирует Яндекс. На нашем сайте они не редактируются.</p>
+        <a class="mvk-reviews__internal-link" href="<?php echo esc_url(home_url('/otzyvy-o-kompanii-moskovskii-vykup-kvartir/')); ?>">Все отзывы на сайте <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="mvk-reviews__yandex-card">
+        <div class="mvk-reviews__yandex-widget">
+          <iframe title="Отзывы о Московском выкупе квартир на Яндекс Картах" loading="lazy" src="https://yandex.ru/maps-reviews-widget/161893440217?comments"></iframe>
+          <a href="https://yandex.ru/maps/org/moskovskiy_vykup_kvartir/161893440217/" target="_blank" rel="noopener noreferrer" class="mvk-reviews__yandex-attribution">Московский выкуп квартир на карте Москвы — Яндекс Карты</a>
         </div>
       </div>
-      <a class="mvk-reviews__all" href="<?php echo esc_url(home_url('/otzyvy-o-kompanii-moskovskii-vykup-kvartir/')); ?>">
-        Смотреть все отзывы
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
-      </a>
     </div>
   </div>
 </section>
