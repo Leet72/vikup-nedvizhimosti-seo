@@ -1,22 +1,27 @@
-# Reviews block v2 — installation plan (not deployed)
+# Установка блока отзывов с Яндекс Картами (черновик, НЕ опубликован)
 
-The new isolated responsive block is implemented as:
+Новый блок состоит из трёх файлов:
+- `wp-content/themes/mvk/template-parts/reviews.php`
+- `wp-content/themes/mvk/css/reviews-redesign.css`
+- `wp-content/themes/mvk/js/reviews-redesign.js`
 
-- `wp-content/themes/mvk/template-parts/reviews.php` — PHP template, reads existing `nk_feedback_bar` Carbon Fields records.
-- `wp-content/themes/mvk/css/reviews-redesign.css` — styles scoped to `.mvk-reviews`.
-- `wp-content/themes/mvk/js/reviews-redesign.js` — accessible previous/next controls, no jQuery/Owl dependency.
+## Официальный виджет
+Предоставленный владельцем iframe ведёт на `https://yandex.ru/maps-reviews-widget/161893440217?comments`, карточка организации: `https://yandex.ru/maps/org/moskovskiy_vykup_kvartir/161893440217/`.
 
-## Integrate into existing theme
+**Это полноценный виджет отзывов 560×800, не маленький бейдж 150×50.** На широком экране он встраивается справа от пояснения, а на мобильном — под текстом на всю ширину. Ссылка-атрибуция Яндекс Карт сохранена. Яндекс загружает реальные отзывы/рейтинг в iframe.
 
-1. **Before touching production:** make a complete tested backup of WordPress files and the database.
-2. Replace **only** the old reviews section in `index.php` (from the `<!-- отзывы -->` comment through its closing `</section>`, before the `<!-- видео отзывы -->` comment) with:
+## Интеграция в WordPress
+1. Создать и проверить полный бэкап файлов + базы данных; желательно отдельную тестовую копию.
+2. Сверить текущие файлы на сервере с локальными исходниками, переданными ранее. Старые файлы нельзя заменять вслепую.
+3. Скопировать файлы шаблона, CSS, JS в соответствующие пути темы `mvk`.
+4. **Только** старую секцию `nk_feedback` в `index.php` (между комментариями `<!-- отзывы -->` и `<!-- видео отзывы -->`) заменить вызовом:
 
 ```php
 <!-- ------------------------------------- отзывы -->
 <?php get_template_part('template-parts/reviews'); ?>
 ```
 
-3. Register the new CSS/JS using `wp_enqueue_scripts` in `functions.php`:
+5. Добавить в `functions.php` после существующей регистрации стилей скриптов:
 
 ```php
 function mvk_enqueue_review_block_assets() {
@@ -30,13 +35,10 @@ function mvk_enqueue_review_block_assets() {
 add_action('wp_enqueue_scripts', 'mvk_enqueue_review_block_assets');
 ```
 
-4. Ensure the three new files exist before replacing `index.php` / `functions.php`.
-5. Test on staging: desktop/mobile layout, real Carbon Fields reviews/images, links, keyboard operation, no console errors, no new PHP warnings, and unchanged page metadata / forms.
-6. Replace the placeholder in `#mvk-yandex-rating-slot` with the **exact code from the company's Yandex Business account**. No rating value is invented.
+6. Тесты перед публикацией: реальные отзывы Carbon Fields, URL, слайдер, адаптивность, загрузка iframe в браузере, клики в Яндекс, доступность внешнего виджета, формы заявок, PHP и консольные ошибки. Сравнить метатеги и время загрузки.
 
-## Notes
-
-- The original website's URLs and other PHP templates are untouched.
-- Existing reviews still come from Carbon Fields; the empty admin panel problem is separate and remains unresolved.
-- The earlier static `ya_feedback-3.png` is **not** a live official badge.
-- This GitHub repository is public: no passwords, database exports, private information, or credentials belong here.
+## Статус
+- Код и CSS изменены только в рабочей ветке GitHub.
+- На реальном WordPress изменения **не внесены**.
+- В локальном окружении `php -l` для PHP файлов успешен; макеты 1440px и 390px без горизонтального переполнения.
+- В среде автоматического локального предпросмотра сетевой iframe блокируется. В браузере пользователя виджет загружается, если Яндекс доступен и разрешает встраивание.
