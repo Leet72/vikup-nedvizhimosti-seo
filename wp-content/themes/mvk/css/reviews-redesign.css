@@ -37,3 +37,21 @@
 @media(max-width:850px){.nk_feedback.mvk-reviews{padding:55px 0}.mvk-reviews__card{flex-basis:calc(75% - 9px)}.mvk-reviews__footer{flex-direction:column;align-items:stretch}.mvk-reviews__all{align-self:flex-start}}
 @media(max-width:570px){.nk_feedback.mvk-reviews{padding:44px 0 50px}.nk_feedback.mvk-reviews .mvk-reviews__container{padding:0 17px}.mvk-reviews__head{gap:10px;align-items:flex-end}.mvk-reviews__eyebrow{font-size:10px;letter-spacing:1.4px}.mvk-reviews__subtitle{font-size:13px}.mvk-reviews__controls{gap:7px;margin-bottom:4px}.mvk-reviews__control{width:37px;height:37px}.mvk-reviews__card{flex-basis:92%;min-height:285px;padding:23px 20px}.mvk-reviews__track{gap:12px}.mvk-reviews__footer{padding:20px 17px;gap:19px}.mvk-reviews__yandex{flex-wrap:wrap;gap:13px}.mvk-reviews__yandex-slot{width:100%}.mvk-reviews__all{width:100%}}
 @media(prefers-reduced-motion:reduce){.mvk-reviews__viewport{scroll-behavior:auto}.mvk-reviews__control,.mvk-reviews__all{transition:none}}
+
+
+/* Full official Yandex Maps reviews widget; responsive wrapper retains attribution. */
+.mvk-reviews__yandex-section{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,560px);gap:42px;align-items:center;background:#035269;border-radius:22px;padding:30px;margin-top:18px;color:#fff}
+.mvk-reviews__yandex-intro{padding:24px 10px 24px 12px;align-self:center}
+.mvk-reviews__yandex-intro .mvk-reviews__eyebrow{color:#ffa46d}
+.mvk-reviews__yandex-heading{font-size:clamp(23px,2.7vw,36px);line-height:1.2;font-weight:800;color:#fff;text-transform:none;margin:0 0 19px}
+.mvk-reviews__yandex-description{font-size:15px;line-height:1.8;color:#e1eff3;margin:0 0 30px;max-width:380px}
+.mvk-reviews__yandex-intro .mvk-reviews__all{width:max-content;max-width:100%;white-space:normal;text-align:center}
+.mvk-reviews__yandex-note{color:#c6e1e9;font-size:12px;line-height:1.65;margin:16px 0 0;max-width:320px}
+.mvk-reviews__internal-link{display:inline-block;margin-top:32px;color:#fff!important;text-decoration:underline;text-underline-offset:5px;font-size:13px;font-weight:700}
+.mvk-reviews__internal-link:hover{color:#ffb88c!important}
+.mvk-reviews__yandex-card{min-width:0;max-width:560px;width:100%;margin-inline:auto}
+.mvk-reviews__yandex-widget{width:100%;height:800px;overflow:hidden;position:relative;background:#fff;border-radius:12px}
+.mvk-reviews__yandex-widget iframe{display:block;width:100%;height:100%;box-sizing:border-box;border:1px solid #e6e6e6;border-radius:8px;background:#fff}
+.mvk-reviews__yandex-attribution{box-sizing:border-box;text-decoration:none!important;color:#b3b3b3!important;font-size:10px;font-family:Arial,sans-serif;padding:0 16px;position:absolute;bottom:8px;width:100%;text-align:center;left:0;overflow:hidden;text-overflow:ellipsis;display:block;max-height:14px;white-space:nowrap}
+@media(max-width:900px){.mvk-reviews__yandex-section{grid-template-columns:1fr;gap:18px;padding:23px}.mvk-reviews__yandex-intro{padding:8px 6px 10px}.mvk-reviews__yandex-heading{max-width:650px}.mvk-reviews__yandex-description{max-width:620px}.mvk-reviews__internal-link{margin-top:16px}}
+@media(max-width:570px){.mvk-reviews__yandex-section{padding:16px 12px 14px;border-radius:15px}.mvk-reviews__yandex-intro{padding:15px 6px 6px}.mvk-reviews__yandex-heading{font-size:23px}.mvk-reviews__yandex-description{font-size:13px;margin-bottom:17px}.mvk-reviews__yandex-widget{height:800px;border-radius:9px}.mvk-reviews__yandex-intro .mvk-reviews__all{width:100%}.mvk-reviews__yandex-attribution{font-size:9px}}
