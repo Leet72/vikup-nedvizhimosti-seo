@@ -1,0 +1,82 @@
+--- a/wp-content/themes/mvk/index.php
++++ b/wp-content/themes/mvk/index.php
+@@ -179,33 +179,52 @@
+ 	</div>
+ </section>
+ <!-- ------------------------------------- отзывы -->
+-<section class="nk_feedback">
+-	<div class="nk_container">
+-		<h2 class="nk_title">Отзывы о нашей работе</h2>
+-		<div class="nk_slider owl-carousel owl-theme">
+-	      <?php
+-          $feedback_bar = carbon_get_theme_option('nk_feedback_bar');
+-          if (!empty($feedback_bar)): ?> 
+-          <?php foreach ($feedback_bar as $feedback_item): 
+-          $feedback_img = $feedback_item['nk_feedback_img'];
+-          $feedback_img_url = wp_get_attachment_image_url( $feedback_img, 'thumbnail' );
+-          $feedback_title = $feedback_item['nk_feedback_title'];
+-          $feedback_txt = $feedback_item['nk_feedback_txt'];
+-          ?> 
+-          <div class="nk_slide">
+-          	 <img class="nk_img" src="<?php echo $feedback_img_url ?>">
+-          	 <div class="nk_txt">
+-          	 	<h3><?php echo $feedback_title ?></h3>
+-          	 	<p><?php echo wpautop($feedback_txt) ?></p>
+-          	 </div>
+-          </div>
+-          <?php endforeach;?>
+-          <?php endif; ?>
+-		</div>
+-	</div>
+-		<div class="nk_container">
+-		<a class="nk_link" href="/otzyvy-o-kompanii-moskovskii-vykup-kvartir/"><img class="thumbnail" src="https://vikup-nedvizhimosti.moscow/wp-content/uploads/2025/02/ya_feedback-3.png" style="width:150px" alt=""></a>
+-	</div>
++<section class="nk_feedback" aria-labelledby="nk-feedback-title">
++    <div class="nk_container">
++        <h2 class="nk_title" id="nk-feedback-title">Отзывы о нашей работе</h2>
++        <div class="nk_slider owl-carousel owl-theme">
++            <?php
++            $feedback_bar = carbon_get_theme_option('nk_feedback_bar');
++            if (is_array($feedback_bar) && !empty($feedback_bar)):
++                foreach ($feedback_bar as $feedback_item):
++                    $feedback_img = $feedback_item['nk_feedback_img'] ?? 0;
++                    $feedback_img_url = wp_get_attachment_image_url($feedback_img, 'thumbnail');
++                    $feedback_title = (string) ($feedback_item['nk_feedback_title'] ?? '');
++                    $feedback_txt = (string) ($feedback_item['nk_feedback_txt'] ?? '');
++            ?>
++                <div class="nk_slide">
++                    <?php if ($feedback_img_url): ?>
++                        <img class="nk_img"
++                             src="<?php echo esc_url($feedback_img_url); ?>"
++                             alt="<?php echo esc_attr($feedback_title ?: 'Отзыв клиента'); ?>"
++                             loading="lazy" decoding="async">
++                    <?php endif; ?>
++                    <div class="nk_txt">
++                        <h3><?php echo esc_html($feedback_title); ?></h3>
++                        <div class="nk_feedback_text"><?php echo wp_kses_post(wpautop($feedback_txt)); ?></div>
++                    </div>
++                </div>
++            <?php
++                endforeach;
++            endif;
++            ?>
++        </div>
++    </div>
++
++    <!-- Пока сохраняем существующий бейдж.
++         Здесь заменим картинку официальным динамическим кодом из Яндекс Бизнеса,
++         когда владелец предоставит код своей организации. -->
++    <div class="nk_container nk_feedback_yandex">
++        <a class="nk_link"
++           href="<?php echo esc_url(home_url('/otzyvy-o-kompanii-moskovskii-vykup-kvartir/')); ?>"
++           aria-label="Посмотреть все отзывы о компании">
++            <img class="thumbnail"
++                 src="<?php echo esc_url(content_url('/uploads/2025/02/ya_feedback-3.png')); ?>"
++                 width="150"
++                 alt="Отзывы о компании Московский выкуп квартир"
++                 loading="lazy" decoding="async">
++        </a>
++    </div>
+ </section>
+ <!-- ------------------------------------- видео отзывы owl-carousel owl-theme-->
+ <?php 
