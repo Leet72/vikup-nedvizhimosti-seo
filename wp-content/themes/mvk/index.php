@@ -316,12 +316,10 @@
 <section class="mvk-yandex-reviews" id="yandex-reviews" aria-labelledby="mvk-yandex-reviews-title">
     <div class="mvk-yandex-reviews__panel">
         <div class="mvk-yandex-reviews__intro">
-            <p class="mvk-yandex-reviews__eyebrow">Яндекс Карты</p>
-            <h2 class="mvk-yandex-reviews__title" id="mvk-yandex-reviews-title">Отзывы о компании<br>на Яндекс Картах</h2>
-            <p class="mvk-yandex-reviews__description">Читайте отзывы клиентов непосредственно из карточки «Московский выкуп квартир» на Яндекс Картах.</p>
-            <a class="mvk-yandex-reviews__button" href="https://yandex.ru/maps/org/moskovskiy_vykup_kvartir/161893440217/" target="_blank" rel="noopener noreferrer">Открыть отзывы на Яндексе <span aria-hidden="true">→</span></a>
-            <p class="mvk-yandex-reviews__note">Рейтинг и отзывы формирует Яндекс. На нашем сайте они не редактируются.</p>
-            <a class="mvk-yandex-reviews__all" href="<?php echo esc_url(home_url('/otzyvy-o-kompanii-moskovskii-vykup-kvartir/')); ?>">Все отзывы на сайте <span aria-hidden="true">→</span></a>
+            <p class="mvk-yandex-reviews__eyebrow">Отзывы клиентов</p>
+            <h2 class="mvk-yandex-reviews__title" id="mvk-yandex-reviews-title">Отзывы о «Московском<br>выкупе квартир»</h2>
+            <p class="mvk-yandex-reviews__description">Узнайте, что клиенты говорят о нашей работе. Оценки и комментарии загружаются напрямую из Яндекс Карт.</p>
+            <a class="mvk-yandex-reviews__button" href="https://yandex.ru/maps/org/moskovskiy_vykup_kvartir/161893440217/" target="_blank" rel="noopener noreferrer">Смотреть отзывы на Яндексе <span aria-hidden="true">→</span></a>
         </div>
         <div class="mvk-yandex-reviews__widget">
             <iframe
