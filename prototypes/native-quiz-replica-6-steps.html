@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Московский выкуп квартир — квиз оценки квартиры (предпросмотр)</title>
+<style>
+:root{font-family:Montserrat,'Segoe UI',Arial,sans-serif;color:#263f5b;background:#f4f4f4;font-synthesis:none}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh}
+button,input{font:inherit}
+.quiz-section{background:#f4f4f4;padding:48px 18px 56px;min-height:100vh}
+.mvkq{--mvk-primary:#005369;--mvk-orange:#fc976d;--mvk-orange-deep:#f07d48;--mvk-muted:#71819a;max-width:940px;margin:0 auto;color:#284263}
+.mvkq__heading{font-family:Montserrat,'Segoe UI',Arial,sans-serif;font-size:clamp(25px,2.6vw,31px);line-height:1.33;font-weight:800;letter-spacing:-.017em;color:var(--mvk-primary);text-transform:uppercase;max-width:835px;margin:2px 0 54px}
+.mvkq__shell{position:relative;min-height:390px;display:flex;flex-direction:column}
+.mvkq__stage{flex:1;position:relative;min-height:275px}
+.mvkq__step{animation:mvk-enter .28s cubic-bezier(.22,.6,.31,1) both;outline:0}
+@keyframes mvk-enter{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+.mvkq__question{font-size:clamp(21px,2.3vw,27px);font-weight:400;line-height:1.36;letter-spacing:-.018em;color:#304d70;margin:0 0 20px}
+.mvkq__answers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 15px}
+.mvkq__option{background:transparent;border:1px solid #d6d8dc;border-radius:6px;min-height:52px;display:flex;align-items:center;gap:16px;width:100%;padding:12px 16px;text-align:left;color:#455b78;font-weight:400;font-size:14px;line-height:1.4;cursor:pointer;transition:background .18s,border-color .18s,box-shadow .18s,transform .18s}
+.mvkq__option:hover{background:#fff;border-color:#fdab86;transform:translateY(-1px)}
+.mvkq__option:focus-visible,.mvkq__btn:focus-visible,.mvkq__back:focus-visible,.mvkq__field:focus-visible{outline:3px solid rgba(251,137,85,.45);outline-offset:2px}
+.mvkq__option[aria-pressed=true]{background:#fff5ef;border-color:#fc9e76;box-shadow:0 0 0 1px rgba(248,145,100,.22)}
+.mvkq__dot{width:20px;height:20px;flex:0 0 20px;border:2px solid #dcdcdc;border-radius:50%;background:#dedede;position:relative;transition:background .18s,border .18s}
+.mvkq__option[aria-pressed=true] .mvkq__dot{background:#ff9d6e;border-color:#ff9d6e;box-shadow:inset 0 0 0 5px white}
+.mvkq__footer{margin-top:32px;padding-top:12px}
+.mvkq__actions{display:flex;justify-content:space-between;align-items:end;gap:16px}
+.mvkq__progress-wrap{flex:1;min-width:0;padding:2px 0 7px}
+.mvkq__percent{font-size:12px;color:#8b98ab;margin-bottom:10px}
+.mvkq__percent strong{color:#f37d48;font-weight:500;margin-left:7px}
+.mvkq__track{height:6px;background:#d0d0d0;border-radius:12px;overflow:hidden}
+.mvkq__fill{width:0;height:100%;background:linear-gradient(90deg,#f4773b,#ffab7c);border-radius:12px;box-shadow:0 0 8px #f5a182;transition:width .35s cubic-bezier(.22,.61,.36,1)}
+.mvkq__controls{display:flex;gap:16px;flex:0 0 auto;align-items:center}
+.mvkq__back{width:44px;height:44px;display:grid;place-items:center;border-radius:50%;background:transparent;border:1px solid #dbddde;cursor:pointer;color:#999;transition:background .2s}
+.mvkq__back:hover:not(:disabled){background:white;color:#526b7d}
+.mvkq__back:disabled{opacity:.42;cursor:not-allowed}
+.mvkq__btn{min-width:124px;min-height:46px;border:0;border-radius:30px;color:white;background:linear-gradient(95deg,#ff9566,#ffa477);padding:10px 19px;box-shadow:0 6px 13px rgba(245,136,88,.19);cursor:pointer;font-size:15px;font-weight:600;display:flex;gap:10px;align-items:center;justify-content:center;transition:filter .15s,transform .15s}
+.mvkq__btn:hover{filter:saturate(1.1);transform:translateY(-1px)}
+.mvkq__btn:active{transform:translateY(1px)}
+.mvkq__btn:disabled{opacity:.52;cursor:not-allowed;transform:none;box-shadow:none}
+.mvkq__enter{text-align:center;color:#9ba6b6;font-size:10px;margin:7px 0 0}
+.mvkq__hint{min-height:20px;color:#bd6644;font-size:12px;margin:13px 0 0}
+.mvkq__final{max-width:580px;margin:0 auto 0;padding-top:0}
+.mvkq__final-heading{text-align:center;line-height:1.35;font-size:clamp(21px,2.2vw,26px);font-weight:400;margin:0 0 23px}
+.mvkq__lead{background:transparent;border:1px solid #dadada;border-radius:5px;padding:21px 26px;margin:0 auto;width:100%;box-shadow:0 15px 40px rgba(0,0,0,.065)}
+.mvkq__lead-label{font-size:14px;color:#71839d;display:block;margin-bottom:12px}
+.mvkq__phone-row{display:flex;height:52px;border:1px solid #c5cbd1;border-radius:3px;overflow:hidden;background:#fff}
+.mvkq__country{border:0;border-right:1px solid #d5d5d5;background:#fafafa;min-width:94px;color:#253e63;display:flex;align-items:center;justify-content:center;gap:7px;font-size:14px}
+.mvkq__country img{width:21px;height:14px;object-fit:cover}
+.mvkq__field{width:100%;min-width:0;border:0;outline:0;padding:0 14px;background:#fff;color:#244364;font-size:15px}
+.mvkq__field::placeholder{font-size:13px;color:#8a97ac}
+.mvkq__consent{display:flex;align-items:flex-start;gap:9px;color:#677a93;line-height:1.45;font-size:11px;margin-top:15px;cursor:pointer}
+.mvkq__consent input{width:15px;height:15px;accent-color:#ff8e59;margin:1px 0 0;flex:0 0 15px}
+.mvkq__link{color:#f67b48;text-decoration:underline;text-underline-offset:2px}
+.mvkq__submit{margin:22px auto 0;background:linear-gradient(100deg,#ff915f,#f9a177);min-width:310px;max-width:100%;border-radius:40px;min-height:48px;font-size:15px}
+.mvkq__disclaimer{color:#8793a5;font-size:11px;text-align:center;line-height:1.5;margin:14px auto 0;max-width:450px}
+.mvkq__demo-status{display:none;margin:16px auto 0;padding:12px 14px;border:1px solid #e9c5ad;border-radius:7px;background:#fff7f0;color:#88573e;text-align:center;font-size:13px;line-height:1.5}
+.mvkq__demo-status[data-visible=true]{display:block}
+.mvkq__final-footer{margin:30px auto 0;max-width:720px}
+.mvkq__banner{font-size:11px;font-weight:600;color:#8190a3;margin-top:14px;text-align:center}
+@media(min-width:700px){.mvkq__step{min-height:260px}}
+@media(max-width:699px){.quiz-section{padding:26px 16px 32px}.mvkq__heading{font-size:clamp(23px,5.3vw,30px);margin-bottom:36px}.mvkq__shell{min-height:400px}.mvkq__stage{min-height:300px}.mvkq__question{font-size:21px;margin-bottom:19px}.mvkq__answers{grid-template-columns:1fr;gap:11px}.mvkq__option{min-height:49px;padding:11px 13px}.mvkq__footer{margin-top:22px}.mvkq__actions{align-items:center}.mvkq__controls{gap:9px}.mvkq__back{width:40px;height:40px}.mvkq__btn{min-width:102px;padding:10px 14px}.mvkq__final-heading{font-size:21px}.mvkq__lead{padding:17px 14px}.mvkq__submit{min-width:100%}.mvkq__final-footer{margin-top:25px}.mvkq__progress-wrap{padding-right:2px}}
+@media(max-width:410px){.quiz-section{padding:24px 14px}.mvkq__heading{font-size:22px}.mvkq__question{font-size:20px}.mvkq__option{font-size:13px}.mvkq__track{height:5px}}
+@media(prefers-reduced-motion:reduce){.mvkq *, .mvkq *:before, .mvkq *:after{animation-duration:0ms!important;transition-duration:0ms!important}}
+</style>
+</head>
+<body>
+<section class="quiz-section">
+<main class="mvkq" id="mvkq" aria-label="Оценка квартиры — опрос">
+  <h1 class="mvkq__heading">Рассчитайте стоимость вашей квартиры за 2 минуты</h1>
+  <div class="mvkq__shell">
+    <div class="mvkq__stage" id="mvkq-stage" aria-live="polite"></div>
+    <div class="mvkq__footer" id="mvkq-footer">
+      <div class="mvkq__actions">
+        <div class="mvkq__progress-wrap"><div class="mvkq__percent">Готово: <strong id="mvkq-percent">0%</strong></div><div class="mvkq__track" role="progressbar" aria-label="Прогресс заполнения" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="mvkq__fill" id="mvkq-fill"></div></div></div>
+        <div class="mvkq__controls"><button type="button" class="mvkq__back" id="mvkq-back" aria-label="Предыдущий вопрос" title="Назад" disabled><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m7-7-7 7 7 7"/></svg></button><div><button type="button" class="mvkq__btn" id="mvkq-next">Далее <span aria-hidden="true">➜</span></button><p class="mvkq__enter">или нажмите Enter</p></div></div>
+      </div>
+      <p class="mvkq__hint" id="mvkq-hint" role="status"></p>
+    </div>
+  </div>
+</main>
+</section>
+<script>
+(() => {
+'use strict';
+const questions = [
+ {title:'Как срочно нужно получить деньги за продажу вашей квартиры?',answers:['Нужно было «ещё вчера»','5–7 дней','2–3 недели','Нет срочности']},
+ {title:'Есть ли ограничения или обременения на квартиру?',answers:['Нет, готова к продаже','Да, ипотека/кредит','Да, арест','Да, другое']},
+ {title:'Ваши документы на квартиру готовы к сделке?',answers:['Да, все документы и справки готовы','Нет, подготовлю после аванса','Не знаю, какие документы нужны для выхода на сделку']},
+ {title:'Есть ли зарегистрированные лица в квартире?',answers:['Нет, все сняты с регистрационного учёта','Есть, готовы выписаться до сделки','Есть, но не готовы выписаться']},
+ {title:'Вы собственник квартиры?',answers:['Да, я один','Да, один из собственников','Нет, узнаю для знакомых']},
+ {title:'На какое время мы можем организовать оценку квартиры? Услуга оценки бесплатная.',answers:['Любое время','На выходных','По согласованию']}
+];
+const answers = Array(questions.length).fill(null); let step=0;
+const $=id=>document.getElementById(id);
+const stage=$('mvkq-stage'),foot=$('mvkq-footer'),next=$('mvkq-next'),back=$('mvkq-back'),hint=$('mvkq-hint');
+function escapeHtml(value){return String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
+function buildQuestion(n){const data=questions[n];const choices=data.answers.map((answer,i)=>`<button type="button" class="mvkq__option" aria-pressed="${answers[n]===i}" data-choice="${i}"><span class="mvkq__dot" aria-hidden="true"></span><span>${escapeHtml(answer)}</span></button>`).join('');return `<div class="mvkq__step" tabindex="-1" data-step="${n}"><h2 class="mvkq__question">${escapeHtml(data.title)}</h2><div class="mvkq__answers" role="group" aria-label="Выберите один ответ">${choices}</div></div>`;}
+function buildFinal(){return `<div class="mvkq__step mvkq__final" tabindex="-1" data-step="final"><h2 class="mvkq__final-heading">Заполните форму, наш менеджер свяжется с вами и обсудит стоимость и условия сделки</h2><form id="mvkq-contact-form" novalidate><div class="mvkq__lead"><label class="mvkq__lead-label" for="mvkq-phone">Введите телефон</label><div class="mvkq__phone-row"><span class="mvkq__country" aria-label="Код России">🇷🇺 &nbsp;+7</span><input class="mvkq__field" id="mvkq-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(999) 999-99-99" maxlength="18" required></div><label class="mvkq__consent"><input id="mvkq-consent" type="checkbox" required><span>Я соглашаюсь на обработку персональных данных согласно <a class="mvkq__link" href="https://vikup-nedvizhimosti.moscow/privacy-policy/" target="_blank" rel="noopener noreferrer">политике конфиденциальности</a>.</span></label></div><button class="mvkq__btn mvkq__submit" type="submit">Узнать стоимость квартиры <span aria-hidden="true">➜</span></button><div class="mvkq__demo-status" id="mvkq-status" role="status"></div><p class="mvkq__disclaimer">Демонстрация интерфейса: сведения никуда не передаются. Реальная отправка будет подключена к WordPress после проверки маршрута заявок и согласий.</p></form></div>`;}
+function render(){
+ stage.innerHTML=step<questions.length?buildQuestion(step):buildFinal();
+ const percent=step<questions.length?Math.round(step/questions.length*100):100;
+ $('mvkq-percent').textContent=`${percent}%`;$('mvkq-fill').style.width=`${percent}%`;
+ document.querySelector('.mvkq__track').setAttribute('aria-valuenow',String(percent));
+ back.disabled=step===0;hint.textContent='';
+ foot.hidden=step===questions.length;
+ if(step<questions.length){next.innerHTML=step===questions.length-1?'Последний шаг <span aria-hidden="true">➜</span>':'Далее <span aria-hidden="true">➜</span>';
+   stage.querySelectorAll('[data-choice]').forEach(button=>button.addEventListener('click',()=>{answers[step]=Number(button.dataset.choice);stage.querySelectorAll('[data-choice]').forEach(opt=>opt.setAttribute('aria-pressed',String(opt===button)));hint.textContent='';}));
+ } else {const form=$('mvkq-contact-form');form.addEventListener('submit',handleDemoSubmit);const phone=$('mvkq-phone');phone.addEventListener('input',event=>{let digits=event.target.value.replace(/\D/g,''); if(digits[0]==='7'||digits[0]==='8')digits=digits.slice(1);digits=digits.slice(0,10);let result=''; if(digits.length){result='('+digits.slice(0,3);if(digits.length>3)result+=') '+digits.slice(3,6);if(digits.length>6)result+='-'+digits.slice(6,8);if(digits.length>8)result+='-'+digits.slice(8,10);}phone.value=result;});}
+}
+function forward(){if(step===questions.length)return;if(answers[step]===null){hint.textContent='Выберите вариант ответа, чтобы продолжить.';return;}step++;render();}
+function backward(){if(step>0){step--;render();}}
+function handleDemoSubmit(event){event.preventDefault();const phone=$('mvkq-phone');const consent=$('mvkq-consent');const msg=$('mvkq-status');const digits=phone.value.replace(/\D/g,'');if(digits.length!==10){msg.textContent='Введите номер телефона из 10 цифр после +7.';msg.dataset.visible='true';phone.focus();return;}if(!consent.checked){msg.textContent='Для отправки заявки необходимо согласие на обработку данных.';msg.dataset.visible='true';consent.focus();return;}msg.textContent='Это демонстрационный квиз. Ответы и телефон не отправлены. Для рабочего сайта подключим защищённый приём заявок.';msg.dataset.visible='true';}
+next.addEventListener('click',forward);back.addEventListener('click',backward);
+document.addEventListener('keydown',event=>{if(event.key==='Enter'&&!event.isComposing&&step<questions.length){const el=document.activeElement;if(el?.tagName==='BUTTON'&&el.hasAttribute('data-choice'))return;event.preventDefault();forward();}});
+render();
+})();
+</script>
+</body>
+</html>
